@@ -58,6 +58,16 @@ export interface Investimento {
   investimento_bpo: number
 }
 
+export interface TotaisCanal {
+  total_leads: number
+  leads_qualificados: number
+  leads_agendados: number
+  leads_noshow: number
+  leads_calls: number
+  leads_ganhos: number
+  leads_perdidos: number
+}
+
 // Queries
 
 // Buscar métricas do funil (para HOME)
@@ -170,7 +180,7 @@ export async function getTotaisFunil() {
   }
 
   // Consolidar por canal
-  const trafego = data?.filter(d => d.canal === 'TRAFEGO').reduce((acc, curr) => ({
+  const trafego = data?.filter((d: MetricasFunil) => d.canal === 'TRAFEGO').reduce((acc: TotaisCanal, curr) => ({
     total_leads: acc.total_leads + curr.total_leads,
     leads_qualificados: acc.leads_qualificados + curr.leads_qualificados,
     leads_agendados: acc.leads_agendados + curr.leads_agendados,
@@ -180,7 +190,7 @@ export async function getTotaisFunil() {
     leads_perdidos: acc.leads_perdidos + curr.leads_perdidos,
   }), { total_leads: 0, leads_qualificados: 0, leads_agendados: 0, leads_noshow: 0, leads_calls: 0, leads_ganhos: 0, leads_perdidos: 0 })
 
-  const bpo = data?.filter(d => d.canal === 'BPO').reduce((acc, curr) => ({
+  const bpo = data?.filter((d: MetricasFunil) => d.canal === 'BPO').reduce((acc: TotaisCanal, curr) => ({
     total_leads: acc.total_leads + curr.total_leads,
     leads_qualificados: acc.leads_qualificados + curr.leads_qualificados,
     leads_agendados: acc.leads_agendados + curr.leads_agendados,
