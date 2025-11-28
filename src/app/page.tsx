@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from 'react';
 import Sidebar from '@/components/Sidebar';
+import { supabase } from '@/lib/supabase';
 import type { DashboardMetrics, MonthlyData } from '@/types';
 
 // Dados mockados para demonstração (substituir por Supabase depois)
@@ -48,9 +49,52 @@ const mockMonthlyData: MonthlyData[] = [
 ];
 
 export default function HomePage() {
-  const [metrics, setMetrics] = useState<DashboardMetrics>(mockMetrics);
-  const [monthlyData, setMonthlyData] = useState<MonthlyData[]>(mockMonthlyData);
-  const [loading, setLoading] = useState(false);
+  const [metrics, setMetrics] = useState<DashboardMetrics | null>(null);
+  const [monthlyData, setMonthlyData] = useState<MonthlyData[]>([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    fetchData();
+  }, []);
+
+  const fetchData = async () => {
+    try {
+      // Buscar métricas do funil
+      const { data: metricsData, error: metricsError } = await supabase
+        .from('powerbi_dashboard_metrics')
+        .select('*')
+        .single();
+
+      if (metricsError) {
+        console.error('Erro ao buscar métricas:', metricsError);
+        // Usar dados mockados como fallback
+        setMetrics(mockMetrics);
+      } else if (metricsData) {
+        setMetrics(metricsData);
+      }
+
+      // Buscar dados mensais
+      const { data: monthlyDataResult, error: monthlyError } = await supabase
+        .from('monthly_data')
+        .select('*')
+        .order('month_num', { ascending: true });
+
+      if (monthlyError) {
+        console.error('Erro ao buscar dados mensais:', monthlyError);
+        // Usar dados mockados como fallback
+        setMonthlyData(mockMonthlyData);
+      } else if (monthlyDataResult) {
+        setMonthlyData(monthlyDataResult);
+      }
+    } catch (error) {
+      console.error('Erro:', error);
+      // Usar dados mockados como fallback em caso de erro
+      setMetrics(mockMetrics);
+      setMonthlyData(mockMonthlyData);
+    } finally {
+      setLoading(false);
+    }
+  };
 
   if (loading) {
     return (
