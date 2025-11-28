@@ -116,3 +116,69 @@ export interface EvolucaoData {
   otb: number;
   traf: number;
 }
+
+// ========================================
+// NOVOS TIPOS PARA SUPABASE
+// ========================================
+
+// Métricas do Funil vindas do Supabase
+export interface MetricasFunil {
+  canal: string
+  ano: number
+  mes: number
+  total_leads: number
+  leads_novos: number
+  leads_qualificando: number
+  leads_qualificados: number
+  leads_agendados: number
+  leads_noshow: number
+  leads_calls: number
+  leads_ganhos: number
+  leads_perdidos: number
+  pct_qualificados: number
+  pct_agendados: number
+  pct_calls: number
+  taxa_conversao: number
+}
+
+// Métricas por Usuário
+export interface MetricasUsuario {
+  usuario: string
+  canal: string
+  ano: number
+  mes: number
+  total_leads: number
+  leads_qualificados: number
+  leads_agendados: number
+  leads_noshow: number
+  leads_calls: number
+  leads_ganhos: number
+  leads_perdidos: number
+  taxa_conversao: number
+}
+
+// Ranking Mottivados (do Supabase)
+export interface RankingMottivadoSupabase {
+  rank: number
+  nome: string
+  leads_qualificados: number
+  leads_agendados: number
+  leads_ganhos: number
+}
+
+// Ranking Clientes (do Supabase)
+export interface RankingClienteSupabase {
+  rank: number
+  cliente: string
+  leads_qualificados: number
+  taxa_conversao: number
+  leads_agendados: number
+}
+
+// Investimentos Mensais
+export interface Investimento {
+  ano: number
+  mes: number
+  investimento_trafego: number
+  investimento_bpo: number
+}
