@@ -278,6 +278,6 @@ export async function fetchUsuarios(): Promise<string[]> {
     return [];
   }
   
-  const usuarios = [...new Set(data?.map(d => d.lead_usuario_responsavel).filter(Boolean))];
+  const usuarios = Array.from(new Set(data?.map(d => d.lead_usuario_responsavel).filter(Boolean)));
   return usuarios.sort();
 }

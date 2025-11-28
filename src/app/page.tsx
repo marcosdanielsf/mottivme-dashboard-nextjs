@@ -73,7 +73,7 @@ export default function HomePage() {
       const monthRows: MonthlyRow[] = [];
       
       // Ordenar meses
-      const sortedMonths = [...byMonth.keys()].sort();
+      const sortedMonths = Array.from(byMonth.keys()).sort();
       
       sortedMonths.forEach(monthKey => {
         const monthLeads = byMonth.get(monthKey)!;
