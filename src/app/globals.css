@@ -24,3 +24,10 @@
     @apply bg-[#0B0F19] text-white;
   }
 }
+
+/* FORÇA CORES MOTTIVME */
+@layer base {
+  body, html {
+    @apply bg-[#0B0F19] text-white !important;
+  }
+}
