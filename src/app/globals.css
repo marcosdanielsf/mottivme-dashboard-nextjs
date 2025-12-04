@@ -2,42 +2,25 @@
 @tailwind components;
 @tailwind utilities;
 
+/* ========================================
+   MOTTIVME DESIGN SYSTEM
+   ======================================== */
+
 :root {
-  --foreground-rgb: 255, 255, 255;
-  --background-start-rgb: 10, 15, 26;
-  --background-end-rgb: 15, 23, 42;
+  --mottivme-dark: #0B0F19;
+  --mottivme-darker: #0a0e17;
+  --mottivme-card: #1a1f2e;
+  
+  --mottivme-blue: #3B82F6;
+  --mottivme-blue-dark: #2563EB;
+  --mottivme-blue-darker: #1D4ED8;
+  
+  --mottivme-text-primary: #FFFFFF;
+  --mottivme-text-secondary: #D1D5DB;
 }
 
-body {
-  color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom right,
-      rgb(var(--background-start-rgb)),
-      rgb(var(--background-end-rgb))
-    );
-  min-height: 100vh;
-}
-
-/* Custom scrollbar */
-::-webkit-scrollbar {
-  width: 8px;
-  height: 8px;
-}
-
-::-webkit-scrollbar-track {
-  background: rgba(15, 23, 42, 0.5);
-}
-
-::-webkit-scrollbar-thumb {
-  background: rgba(59, 130, 246, 0.5);
-  border-radius: 4px;
-}
-
-::-webkit-scrollbar-thumb:hover {
-  background: rgba(59, 130, 246, 0.7);
-}
-
-/* Smooth transitions */
-* {
-  transition: background-color 0.2s ease, border-color 0.2s ease;
+@layer base {
+  body {
+    @apply bg-[#0B0F19] text-white;
+  }
 }
